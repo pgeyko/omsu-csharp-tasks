@@ -6,7 +6,7 @@ namespace Labs
 {
     public class Program
     {
-        private const int NumTask = 2;
+        private const int NumTask = 1;
         public static void Main(string[] args)
         {
             if (args.Length == 0)
