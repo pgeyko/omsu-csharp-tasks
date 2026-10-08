@@ -1,10 +1,19 @@
 using System;
-
+using Labs.Utils;
 namespace Labs.Tasks
 {
     public class Task1
     {
-        public static void Run(int x, int y, int z)
+        public static void Run(Dictionary<string, string?> parsed)
+        {
+            if (!ArgReader.TryGetInt(parsed, "x", out int x)) return;
+            if (!ArgReader.TryGetInt(parsed, "y", out int y)) return;
+            if (!ArgReader.TryGetInt(parsed, "z", out int z)) return;
+
+            Calculate(x, y, z);
+
+        }
+        private static void Calculate(int x, int y, int z)
         {
             if (z == 0)
             {
