@@ -6,7 +6,7 @@ namespace Labs
 {
     public class Program
     {
-        private const int NumTask = 2;
+        private const int NumTask = 3;
         public static void Main(string[] args)
         {
             if (args.Length == 0)
@@ -25,6 +25,9 @@ namespace Labs
                     break;
                 case 2:
                     Task2.Run(parsed);
+                    break;
+                case 3:
+                    Task3.Run(parsed);
                     break;
                 default:
                     Console.WriteLine("ERROR: Unknown task.");

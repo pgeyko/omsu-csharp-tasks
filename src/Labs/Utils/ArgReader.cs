@@ -29,5 +29,19 @@ namespace Labs.Utils
             Console.WriteLine($"ERROR: Value {key.ToUpper()} must be a valid date in format DD.MM.YYYY.");
             return false;
         }
+        public static bool TryGetStr(Dictionary<string, string?> parsed, string key, out string value)
+        {
+            ArgumentNullException.ThrowIfNull(parsed);
+            ArgumentNullException.ThrowIfNull(key);
+            if (parsed.TryGetValue(key, out string? rawValue) && !string.IsNullOrWhiteSpace(rawValue))
+            {
+                value = rawValue;
+                return true;
+            }
+
+            value = string.Empty;
+            Console.WriteLine($"ERROR: Value {key.ToUpper()} must be specified.");
+            return false;
+        }
     }
 }
