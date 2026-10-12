@@ -6,6 +6,8 @@ namespace Labs.Utils
     {
         public static bool TryGetInt(Dictionary<string, string?> parsed, string key, out int value)
         {
+            ArgumentNullException.ThrowIfNull(parsed);
+            ArgumentNullException.ThrowIfNull(key);
             if (int.TryParse(parsed.GetValueOrDefault(key), out value))
             {
                 return true;
@@ -16,6 +18,8 @@ namespace Labs.Utils
 
         public static bool TryGetDate(Dictionary<string, string?> parsed, string key, out DateTime value)
         {
+            ArgumentNullException.ThrowIfNull(parsed);
+            ArgumentNullException.ThrowIfNull(key);
             string? text = parsed.GetValueOrDefault(key);
             if (text != null && DateTime.TryParseExact(text, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out value))
             {
