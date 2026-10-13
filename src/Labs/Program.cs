@@ -19,12 +19,18 @@ namespace Labs
                 return;
             BaseTask? task = CreateTask(parsed, num);
             if (task is null)
-                return; // ArgReader уже напечатал ERROR:
+                return;
 
-            try { task.Execute(); }
-            catch (ValidationException ex) { CmdOutput.CmdWriteLine("ERROR: " + ex.Message); }
+            try
+            {
+                task.Execute();
+            }
+            catch (ValidationException ex)
+            {
+                CmdOutput.CmdWriteLine("ERROR: " + ex.Message);
+            }
         }
-        
+
         private static BaseTask? CreateTask(Dictionary<string, string?> parsed, int num)
         {
             switch (num)
