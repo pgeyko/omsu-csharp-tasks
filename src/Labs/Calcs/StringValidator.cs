@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
+using Labs.Exceptions;
 using Labs.Utils;
-namespace Labs.Utils
+namespace Labs.Calcs
 {
     public static class StringValidator
     {

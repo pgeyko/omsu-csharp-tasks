@@ -1,51 +1,53 @@
-﻿using System;
-using Labs.Utils;
+﻿using Labs.Exceptions;
+using Labs.InputOutput;
 using Labs.Tasks;
+using Labs.Utils;
 
 namespace Labs
 {
     public class Program
     {
-        private const int NumTask = 3;
         public static void Main(string[] args)
         {
             if (args.Length == 0)
             {
-                PrintHelp();
+                HelpMessage.PrintHelp();
                 return;
             }
             var parsed = CmdArgsParser.Parse(args);
-            if (!ArgsValidator.TryGetTask(parsed, out int task, NumTask))
+            if (!ArgsValidator.TryGetTask(parsed, out int num, NumTask: 3))
                 return;
+            BaseTask? task = CreateTask(parsed, num);
+            if (task is null)
+                return; // ArgReader уже напечатал ERROR:
 
-            switch (task)
+            try { task.Execute(); }
+            catch (ValidationException ex) { CmdOutput.CmdWriteLine("ERROR: " + ex.Message); }
+        }
+        
+        private static BaseTask? CreateTask(Dictionary<string, string?> parsed, int num)
+        {
+            switch (num)
             {
                 case 1:
-                    Task1.Run(parsed);
-                    break;
+                    if (!ArgReader.TryGetInt(parsed, "x", out int x)) return null;
+                    if (!ArgReader.TryGetInt(parsed, "y", out int y)) return null;
+                    if (!ArgReader.TryGetInt(parsed, "z", out int z)) return null;
+                    return new Task1(x, y, z);
                 case 2:
-                    Task2.Run(parsed);
-                    break;
+                    if (!ArgReader.TryGetDate(parsed, "d1st", out DateTime d1st)) return null;
+                    if (!ArgReader.TryGetDate(parsed, "d1end", out DateTime d1end)) return null;
+                    if (!ArgReader.TryGetDate(parsed, "d2st", out DateTime d2st)) return null;
+                    if (!ArgReader.TryGetDate(parsed, "d2end", out DateTime d2end)) return null;
+                    return new Task2(d1st, d1end, d2st, d2end);
                 case 3:
-                    Task3.Run(parsed);
-                    break;
+                    if (!ArgReader.TryGetStr(parsed, "s1", out string s1)) return null;
+                    if (!ArgReader.TryGetStr(parsed, "s2", out string s2)) return null;
+                    return new Task3(s1, s2);
                 default:
-                    Console.WriteLine("ERROR: Unknown task.");
-                    break;
+                    CmdOutput.CmdWriteLine("ERROR: Unknown task.");
+                    return null;
             }
-        }
-
-        private static void PrintHelp()
-        {
-            Console.WriteLine("HELP:");
-            Console.WriteLine("    --task - task number");
-            Console.WriteLine("    -x - value of X");
-            Console.WriteLine("    -y - value of Y");
-            Console.WriteLine("    -z - value of Z");
-            Console.WriteLine("    -d1st - start of the first date segment (DD.MM.YYYY)");
-            Console.WriteLine("    -d1end - end of the first date segment (DD.MM.YYYY)");
-            Console.WriteLine("    -d2st - start of the second date segment (DD.MM.YYYY)");
-            Console.WriteLine("    -d2end - end of the second date segment (DD.MM.YYYY)");
         }
     }
 }

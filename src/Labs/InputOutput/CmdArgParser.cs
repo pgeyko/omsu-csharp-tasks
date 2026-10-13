@@ -1,4 +1,4 @@
-namespace Labs.Utils
+namespace Labs.InputOutput
 {
     public class CmdArgsParser
     {

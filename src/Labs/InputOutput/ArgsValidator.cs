@@ -1,4 +1,4 @@
-namespace Labs.Utils
+namespace Labs.InputOutput
 {
     public class ArgsValidator
     {
@@ -6,17 +6,17 @@ namespace Labs.Utils
         {
             if (!int.TryParse(parsed.GetValueOrDefault("task"), out task))
             {
-                Console.WriteLine("ERROR: Task number must be integer number.");
+                CmdOutput.CmdWriteLine("ERROR: Task number must be integer number.");
                 return false;
             }
             if (task < 1)
             {
-                Console.WriteLine("ERROR: Unknown task. Task number cannot be less than 1.");
+                CmdOutput.CmdWriteLine("ERROR: Unknown task. Task number cannot be less than 1.");
                 return false;
             }
             if (task > NumTask)
             {
-                Console.WriteLine($"ERROR: Unknown task. Task number must not exceed {NumTask}.");
+                CmdOutput.CmdWriteLine($"ERROR: Unknown task. Task number must not exceed {NumTask}.");
                 return false;
             }
             return true;

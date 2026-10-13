@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Labs.Utils
+namespace Labs.Exceptions
 {
     public class ValidationException(string message) : Exception(message)
     {

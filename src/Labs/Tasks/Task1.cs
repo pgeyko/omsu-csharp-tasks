@@ -1,33 +1,25 @@
-using System;
-using Labs.Utils;
+using System.Globalization;
+using Labs.Calcs;
+using Labs.InputOutput;
+
 namespace Labs.Tasks
 {
-    public class Task1
+    public sealed class Task1 : BaseTask
     {
-        public static void Run(Dictionary<string, string?> parsed)
+        private readonly int x, y, z;
+
+        public Task1(int x, int y, int z)
         {
-            if (!ArgReader.TryGetInt(parsed, "x", out int x)) return;
-            if (!ArgReader.TryGetInt(parsed, "y", out int y)) return;
-            if (!ArgReader.TryGetInt(parsed, "z", out int z)) return;
-
-            Calculate(x, y, z);
-
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
-        private static void Calculate(int x, int y, int z)
+        public override int Number => 1;
+        public override string Description => "X % Z + sqrt(Y)";
+        public override void Execute()
         {
-            if (z == 0)
-            {
-                Console.WriteLine("ERROR: Z must not be zero (division by zero in X % Z).");
-                return;
-            }
-            if (y < 0)
-            {
-                Console.WriteLine("ERROR: Y must not be negative (sqrt of negative number).");
-                return;
-            }
-
-            double result = x % z + Math.Sqrt(y);
-            Console.WriteLine($"RESULT: {result:F3}");
+            double r = FormulaCalc.Calculate(x, y, z);
+            CmdOutput.CmdWriteLine(string.Format(CultureInfo.InvariantCulture, "RESULT: {0:F3}", r));
         }
     }
 }

@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Labs.Utils
+namespace Labs.InputOutput
 {
     public static class ArgReader
     {
@@ -12,7 +12,7 @@ namespace Labs.Utils
             {
                 return true;
             }
-            Console.WriteLine($"ERROR: Value {key.ToUpper()} must be an integer.");
+            CmdOutput.CmdWriteLine($"ERROR: Value {key.ToUpper()} must be an integer.");
             return false;
         }
 
@@ -26,7 +26,7 @@ namespace Labs.Utils
                 return true;
             }
             value = default;
-            Console.WriteLine($"ERROR: Value {key.ToUpper()} must be a valid date in format DD.MM.YYYY.");
+            CmdOutput.CmdWriteLine($"ERROR: Value {key.ToUpper()} must be a valid date in format DD.MM.YYYY.");
             return false;
         }
         public static bool TryGetStr(Dictionary<string, string?> parsed, string key, out string value)
@@ -40,7 +40,7 @@ namespace Labs.Utils
             }
 
             value = string.Empty;
-            Console.WriteLine($"ERROR: Value {key.ToUpper()} must be specified.");
+            CmdOutput.CmdWriteLine($"ERROR: Value {key.ToUpper()} must be specified.");
             return false;
         }
     }
