@@ -34,7 +34,7 @@ namespace Labs.Utils
         }
         public static void ValidatePhone(string s)
         {
-            if (!Regex.IsMatch(s, @"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$$"))
+            if (!Regex.IsMatch(s, @"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"))
             {
                 throw new ValidationException("String is not an phone.");
             }
