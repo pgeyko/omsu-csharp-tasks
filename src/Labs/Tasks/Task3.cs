@@ -41,7 +41,7 @@ namespace Labs.Tasks
         }
         private static bool IsPhone(string value)
         {
-            return Regex.IsMatch(value, @"^^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$$");
+            return Regex.IsMatch(value, @"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$$");
         }
         private static bool IsIp(string value)
         {
