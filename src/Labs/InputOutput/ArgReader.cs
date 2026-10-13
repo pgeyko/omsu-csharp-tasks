@@ -1,4 +1,5 @@
 using System.Globalization;
+using Labs.Exceptions;
 
 namespace Labs.InputOutput
 {
@@ -12,8 +13,7 @@ namespace Labs.InputOutput
             {
                 return true;
             }
-            CmdOutput.CmdWriteLine($"ERROR: Value {key.ToUpper()} must be an integer.");
-            return false;
+            throw new ValidationException($"Value {key.ToUpper()} must be an integer.");
         }
 
         public static bool TryGetDate(Dictionary<string, string?> parsed, string key, out DateTime value)
@@ -26,8 +26,7 @@ namespace Labs.InputOutput
                 return true;
             }
             value = default;
-            CmdOutput.CmdWriteLine($"ERROR: Value {key.ToUpper()} must be a valid date in format DD.MM.YYYY.");
-            return false;
+            throw new ValidationException($"Value {key.ToUpper()} must be a valid date in format DD.MM.YYYY.");
         }
         public static bool TryGetStr(Dictionary<string, string?> parsed, string key, out string value)
         {
@@ -40,8 +39,7 @@ namespace Labs.InputOutput
             }
 
             value = string.Empty;
-            CmdOutput.CmdWriteLine($"ERROR: Value {key.ToUpper()} must be specified.");
-            return false;
+            throw new ValidationException($"Value {key.ToUpper()} must be specified.");
         }
     }
 }

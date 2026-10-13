@@ -1,7 +1,6 @@
 ﻿using Labs.Exceptions;
 using Labs.InputOutput;
 using Labs.Tasks;
-using Labs.Utils;
 
 namespace Labs
 {
@@ -14,15 +13,16 @@ namespace Labs
                 HelpMessage.PrintHelp();
                 return;
             }
-            var parsed = CmdArgsParser.Parse(args);
-            if (!ArgsValidator.TryGetTask(parsed, out int num, NumTask: 3))
-                return;
-            BaseTask? task = CreateTask(parsed, num);
-            if (task is null)
-                return;
-
             try
             {
+                var parsed = CmdArgsParser.Parse(args);
+                if (!ArgsValidator.TryGetTask(parsed, out int num, NumTask: 3))
+                    return;
+                BaseTask? task = CreateTask(parsed, num);
+                if (task is null)
+                    return;
+
+
                 task.Execute();
             }
             catch (ValidationException ex)
