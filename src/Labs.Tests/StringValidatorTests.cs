@@ -23,7 +23,7 @@ namespace Labs.Tests
             Assert.DoesNotThrow(() => StringValidator.ValidateReversed(s1, s2));
         }
 
-        [TestCase("test@example.com")]
+        [TestCase("pavel_geiko@invalid.com")]
         public void ValidateEmail_ValidEmail_DoesNotThrow(string s)
         {
             Assert.DoesNotThrow(() => StringValidator.ValidateEmail(s));
@@ -34,7 +34,7 @@ namespace Labs.Tests
         {
             Assert.DoesNotThrow(() => StringValidator.ValidatePhone(s));
         }
-        
+
         [TestCase("192.168.1.1")]
         public void ValidateIp_ValidIp_DoesNotThrow(string s)
         {
